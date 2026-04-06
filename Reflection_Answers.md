@@ -1,0 +1,5 @@
+1) I used StreamBuilder in my inventory app because it listens to the Firestore stream continuously. Whenever I add or delete an item the list updates instantly without me doing anything. FutureBuilder would only load data once and I'd need to manually refresh which defeats the purpose of real-time.
+
+2) In my app I created a separate FirestoreService class that handles all the Firestore operations like addItem, updateItem, deleteItem, and streamItems. This keeps my UI code clean because the inventory screen just calls service methods instead of having Firestore code mixed into the widgets. If I ever switch to a different database I'd only need to change the service class and the UI stays the same.
+
+3) I added validation to make sure the name isn't empty, the price is a positive number, and the quantity is a valid whole number. Without this someone could accidentally save an item with a negative price or type letters in the quantity field and it would either crash or put bad data in Firestore. The validation catches those mistakes before they reach the database so the data stays clean.
